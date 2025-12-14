@@ -39,23 +39,19 @@ jobs:
 
       - name: Create .env file
         run: |
-          cat > .env << 'EOF'
-          OCI_REGION=${{ secrets.OCI_REGION }}
-          OCI_USER_ID=${{ secrets.OCI_USER_ID }}
-          OCI_TENANCY_ID=${{ secrets.OCI_TENANCY_ID }}
-          OCI_KEY_FINGERPRINT=${{ secrets.OCI_KEY_FINGERPRINT }}
-          OCI_PRIVATE_KEY_FILENAME=/tmp/oci_private_key.pem
-          OCI_AVAILABILITY_DOMAIN=${{ secrets.OCI_AVAILABILITY_DOMAIN }}
-          OCI_SUBNET_ID=${{ secrets.OCI_SUBNET_ID }}
-          OCI_IMAGE_ID=${{ secrets.OCI_IMAGE_ID }}
-          OCI_OCPUS=${{ secrets.OCI_OCPUS }}
-          OCI_MEMORY_IN_GBS=${{ secrets.OCI_MEMORY_IN_GBS }}
-          OCI_SSH_PUBLIC_KEY=${{ secrets.OCI_SSH_PUBLIC_KEY }}
-          OCI_SHAPE=VM.Standard.A1.Flex
-          OCI_MAX_INSTANCES=1
-          EOF
-          # Remove leading whitespace from each line
-          sed -i 's/^[[:space:]]*//' .env
+          echo "OCI_REGION=${{ secrets.OCI_REGION }}" > .env
+          echo "OCI_USER_ID=${{ secrets.OCI_USER_ID }}" >> .env
+          echo "OCI_TENANCY_ID=${{ secrets.OCI_TENANCY_ID }}" >> .env
+          echo "OCI_KEY_FINGERPRINT=${{ secrets.OCI_KEY_FINGERPRINT }}" >> .env
+          echo "OCI_PRIVATE_KEY_FILENAME=/tmp/oci_private_key.pem" >> .env
+          echo "OCI_AVAILABILITY_DOMAIN=${{ secrets.OCI_AVAILABILITY_DOMAIN }}" >> .env
+          echo "OCI_SUBNET_ID=${{ secrets.OCI_SUBNET_ID }}" >> .env
+          echo "OCI_IMAGE_ID=${{ secrets.OCI_IMAGE_ID }}" >> .env
+          echo "OCI_OCPUS=${{ secrets.OCI_OCPUS }}" >> .env
+          echo "OCI_MEMORY_IN_GBS=${{ secrets.OCI_MEMORY_IN_GBS }}" >> .env
+          echo 'OCI_SSH_PUBLIC_KEY=${{ secrets.OCI_SSH_PUBLIC_KEY }}' >> .env
+          echo "OCI_SHAPE=VM.Standard.A1.Flex" >> .env
+          echo "OCI_MAX_INSTANCES=1" >> .env
 
       - name: Run OCI instance creation script
         run: php index.php
