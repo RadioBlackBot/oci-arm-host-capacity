@@ -54,6 +54,8 @@ jobs:
           OCI_SHAPE=VM.Standard.A1.Flex
           OCI_MAX_INSTANCES=1
           EOF
+          # Remove leading whitespace from each line
+          sed -i 's/^[[:space:]]*//' .env
 
       - name: Run OCI instance creation script
         run: php index.php
